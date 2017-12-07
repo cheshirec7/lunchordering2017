@@ -16,7 +16,7 @@ return [
         // wavatar: generated faces with differing features and backgrounds
         // retro: awesome generated, 8-bit arcade-style pixelated faces
         // robohash: a generated robot with different colors, faces, etc
-        'fallback' => 'identicon',
+        'fallback' => 'monsterid',
 
         // would you like to return a https://... image
         'secure' => true,
@@ -40,7 +40,7 @@ return [
 
     'orderlunches' => [
         'size'   => 36,
-        'fallback' => 'identicon',
+        'fallback' => 'monsterid',
         'secure' => true,
         'maximumRating' => 'g',
         'forceDefault' => false,
