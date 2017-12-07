@@ -3,8 +3,8 @@
 namespace App\Listeners;
 
 use Illuminate\Auth\Events\Logout;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LogLogout
 {
@@ -27,8 +27,10 @@ class LogLogout
     public function handle(Logout $event)
     {
         if (config('app.log_user_agent')) {
-            $insert = 'insert los_useragents(account_id,user_agent) values(:aid, :ua)';
-            DB::statement($insert, array('aid' => Auth::id(), 'ua' => 'logout'));
+            if (Auth::id()) {
+                $insert = 'insert los_useragents(account_id,user_agent) values(:aid, :ua)';
+                DB::statement($insert, array('aid' => Auth::id(), 'ua' => 'logout'));
+            }
         }
     }
 }

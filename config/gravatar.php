@@ -16,7 +16,7 @@ return [
         // wavatar: generated faces with differing features and backgrounds
         // retro: awesome generated, 8-bit arcade-style pixelated faces
         // robohash: a generated robot with different colors, faces, etc
-        'fallback' => 'monsterid',
+        'fallback' => 'identicon',
 
         // would you like to return a https://... image
         'secure' => true,
@@ -35,6 +35,15 @@ return [
         'forceDefault' => false,
 
         // If you require a file-type extension (some places do) then you may also add an (optional) .jpg extension to that URL
+        'forceExtension' => 'jpg',
+    ],
+
+    'orderlunches' => [
+        'size'   => 36,
+        'fallback' => 'identicon',
+        'secure' => true,
+        'maximumRating' => 'g',
+        'forceDefault' => false,
         'forceExtension' => 'jpg',
     ],
 ];

@@ -10,6 +10,7 @@ $this->get('auth/fb', 'SocialController@gotoFacebook')->name('gotoFacebook');
 $this->get('auth/fb/callback', 'SocialController@returnFromFacebook')->name('returnFromFacebook');
 
 Auth::routes();
+$this->get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 $this->get('contact', 'ContactController@index')->name('contact');
 $this->post('contact/send', 'ContactController@send')->name('contact.send');

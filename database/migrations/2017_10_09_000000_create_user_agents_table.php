@@ -17,7 +17,7 @@ class CreateUserAgentsTable extends Migration
     {
         Schema::create('los_useragents', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('account_id')->index();
+            $table->unsignedInteger('account_id')->index()->nullable();
             $table->string('user_agent')->nullable();
             $table->string('ipaddr')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

@@ -6,11 +6,14 @@
 @section('content')
     <div class="col mx-auto mt-xl-4 mt-2 orderlunches">
         <div class="card">
-            <img src="/img/providers/{!! $lunchdate->provider_image !!}">
+            <img class="provider" src="/img/providers/{!! $lunchdate->provider_image !!}">
             <div class="order-header">
                 Order Lunch
             </div>
             <div class="date-user-header">
+                @if(!empty($avatar))
+                <img class="avatar" src="{!! $avatar !!}" alt="User Image"/>
+                @endif
                 {!! $orderdate->format('l, F jS, Y') !!}<br/>{!! $user->first_last !!}
             </div>
 

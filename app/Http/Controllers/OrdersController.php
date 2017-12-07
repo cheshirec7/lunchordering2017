@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\User;
+use App\Models\Account;
 use App\Repositories\AccountRepository;
 use App\Repositories\LunchDateMenuItemRepository;
 use App\Repositories\LunchDateRepository;
@@ -355,8 +356,16 @@ class OrdersController extends Controller
         if (!$user)
             return $this->doRedirectDanger('Invalid user specified.');
 
-        if ($user->account_id != Auth::id() && !(Gate::allows('manage-backend')))
-            throw new AuthorizationException();
+        $avatar = null;
+        if ($user->account_id != Auth::id()) {
+            if (!(Gate::allows('manage-backend')))
+                throw new AuthorizationException();
+
+            $account = Account::find($aid);
+            if (!$account)
+                return $this->doRedirectDanger('Invalid account specified.');
+            $avatar = \Gravatar::get($account->email, 'orderlunches');
+        }
 
         try {
             $order_date = Carbon::createFromFormat('Ymd', $date_ymd)->setTime(0, 0, 0);
@@ -419,7 +428,8 @@ class OrdersController extends Controller
             ->withAccountid($aid)
             ->withCheckeditems($checkeditems)
             ->withUncheckeditems1($uncheckeditems1)
-            ->withUncheckeditems2($uncheckeditems2);
+            ->withUncheckeditems2($uncheckeditems2)
+            ->withAvatar($avatar);
     }
 
 
