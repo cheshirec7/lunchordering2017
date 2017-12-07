@@ -1,0 +1,141 @@
+.orderlunches {
+    max-width: 1200px;
+}
+
+.order-header {
+    background-color: #427cd8;
+    background-image: linear-gradient(to bottom, #93caff 0, #003db8 100%);
+    background-repeat: repeat-x;
+    color: #fff;
+    border: 1px solid #777;
+    text-shadow: 1px 1px #222;
+    font-variant: small-caps;
+    text-align: left;
+    font-size: 17px;
+    font-family: Vollkorn, serif;
+    padding: 0.2rem 0.75rem;
+}
+
+.orderlunches .date-user-header {
+    background-color: #f0f3f5;
+    text-align: left;
+    border-bottom: 1px solid #c2cfd6;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 0.2rem 0.75rem;
+}
+
+.orderlunches .card img {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    padding: 5px;
+    background-color: rgba(245, 245, 245, 0.88);
+    max-height: 60px;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px #aaa;
+}
+
+.orderlunches .card-body {
+    padding: 0.5rem 0.75rem;
+}
+
+.orderlunches .card-footer {
+    padding: 0.75rem;
+}
+
+.orderlunches .lunchincludes {
+    font-style: italic;
+    text-align: center;
+    color: #4285f4;
+    font-size: 12px;
+    line-height: 14px;
+    padding: 8px 0 2px;
+}
+
+.orderlunches .lunchestable {
+    width: 100%;
+}
+
+.orderlunches .lunchestable th {
+    text-align: center;
+    font-weight: normal;
+    padding: 0 0 3px;
+}
+
+.orderlunches .lunchestable td {
+    padding: 4px 0;
+}
+
+.orderlunches .lunchestable td:first-child,
+.orderlunches .lunchestable td:last-child {
+    width: 1px;
+}
+
+.orderlunches .lunchestable input[type=number] {
+    padding: 0;
+    border: 1px solid #ccc;
+    text-align: center;
+    width: 35px;
+    margin-left: 8px;
+}
+
+.orderlunches .lunchestable label {
+    margin: 0 6px 0 0;
+}
+
+.orderlunches hr {
+    margin: 3px 0 1px;
+    border-top: 1px dashed #ddd;
+}
+
+.orderlunches .totals {
+    color: #f60;
+}
+
+.orderlunches #ordertotal {
+    margin-right: 3px;
+}
+
+.orderlunches .custom-control {
+    min-height: unset;
+    padding: 0;
+    display: block;
+}
+
+.orderlunches .custom-checkbox .custom-control-indicator {
+    position: relative;
+    top: 0;
+}
+
+.orderlunches .custom-control-description {
+    line-height: 16px;
+    cursor: default;
+    user-select: none;
+    margin-top: 1px;
+}
+
+@media (max-width: 767px) {
+
+    .orderlunches .lunchestable.col2 thead {
+        display: none;
+    }
+
+    .orderlunches .custom-control-description {
+        font-size: 13px;
+        line-height: 14px;
+    }
+
+    .orderlunches .totals {
+        font-size: 13px;
+    }
+
+    .orderlunches .date-user-header {
+        font-size: 13px;
+        line-height: 17px;
+    }
+
+    .orderlunches .card img {
+        max-width: 90px;
+    }
+}
