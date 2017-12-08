@@ -20,7 +20,7 @@
     <div class="col mx-auto mt-xl-4 mt-2">
         <div class="card">
             <div class="card-header">
-                {!! link_to_route('admin.providers.create', 'New Provider', [], ['class' => 'btn btn-success btn-sm pull-right', 'title' => 'New Provider', 'id' => 'btnCreate']) !!}
+                {!! link_to_route('admin.providers.create', 'New Provider', [], ['class' => 'btn btn-success btn-sm float-right', 'title' => 'New Provider', 'id' => 'btnCreate']) !!}
                 <h3><i class="fa fa-table"></i>Providers</h3>
             </div>
             <div class="card-body">

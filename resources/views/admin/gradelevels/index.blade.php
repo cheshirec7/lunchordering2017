@@ -20,7 +20,7 @@
     <div class="col maxw-768 mx-auto mt-xl-4 mt-md-3 mt-2">
         <div class="card">
             <div class="card-header">
-                {!! link_to_route('admin.gradelevels.create', 'New Grade Level', [], ['class' => 'btn btn-success btn-sm pull-right', 'title' => 'New Grade Level', 'id' => 'btnCreate']) !!}
+                {!! link_to_route('admin.gradelevels.create', 'New Grade Level', [], ['class' => 'btn btn-success btn-sm float-right', 'title' => 'New Grade Level', 'id' => 'btnCreate']) !!}
                 <h3><i class="fa fa-table"></i>Grade Levels</h3>
             </div>
             <div class="card-body">

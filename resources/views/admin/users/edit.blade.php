@@ -4,7 +4,7 @@
     <div class="col maxw-500 mx-auto mt-xl-5 mt-md-3 mt-2">
         <div class="card">
             <div class="card-header">
-                <h3><i class="fa fa-pencil"></i>Edit User</h3>
+                <h3><i class="fa fa-pen-square"></i>Edit User</h3>
             </div>
             {!! Form::model($user, ['method' => 'PUT', 'route' => ['admin.users.update', $user->id]]) !!}
             <div class="card-body">

@@ -39,7 +39,7 @@
                 <div class="form-group price">
                     {!! Form::label('price', 'Price') !!}
                     <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                        <div class="input-group-addon"><i class="fa fa-money-bill-alt"></i></div>
                         <input type="text" class="form-control" name="price" id="price"
                                required="required" value="{!! config('app.menuitem_default_price') !!}">
                     </div>

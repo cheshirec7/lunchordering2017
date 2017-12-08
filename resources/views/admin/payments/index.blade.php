@@ -19,7 +19,7 @@
         <div class="card">
             <div class="card-header">
 
-                <h3><i class="fa fa-dollar"></i>Receive Payments</h3>
+                <h3><i class="fa fa-money-bill-alt"></i>Receive Payments</h3>
             </div>
             <div class="card-body">
                 @include('includes.partials.messages')
@@ -74,7 +74,7 @@
                                     {!! Form::label('credit_date', 'Receive Date') !!}
                                     <div class="input-group">
                                         {!! Form::text('credit_date', $date, ['class' => 'form-control datepicker', 'required' => 'required']) !!}
-                                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                        <div class="input-group-addon"><i class="far fa-calendar"></i></div>
                                     </div>
                                 </div>
                             </div>

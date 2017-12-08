@@ -14,11 +14,11 @@
                         class="nav-link {!! active_class(Active::checkUriPattern('/')) !!}"
                         href="{!! url('/') !!}"><i class="fa fa-home"></i>Home</a></li>
             <li class="nav-item"><a class="nav-link {!! active_class(Active::checkUriPattern('orders*')) !!}"
-                                    href="{!! route('orders.index') !!}"><i class="fa fa-cutlery"></i>Order Lunches</a>
+                                    href="{!! route('orders.index') !!}"><i class="fa fa-utensils"></i>Order Lunches</a>
             </li>
 
             <li class="nav-item"><a class="nav-link {!! active_class(Active::checkUriPattern('lunchreport*')) !!}"
-                                    href="{!! route('lunchreport') !!}"><i class="fa fa-file-text"></i>Lunch Report</a>
+                                    href="{!! route('lunchreport') !!}"><i class="fa fa-sticky-note"></i>Lunch Report</a>
             </li>
 
             <li class="nav-item"><a class="nav-link {!! active_class(Active::checkUriPattern('myaccount*')) !!}"
@@ -37,51 +37,51 @@
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
                         <a class="nav-link {!! active_class(Active::checkUriPattern('admin/gradelevels*')) !!}"
-                           href="{!! route('admin.gradelevels.index') !!}"><i class="fa fa-circle-o"></i>Grade
+                           href="{!! route('admin.gradelevels.index') !!}"><i class="far fa-circle"></i>Grade
                             Levels</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {!! active_class(Active::checkUriPattern('admin/accounts*')) !!}"
-                           href="{!! route('admin.accounts.index') !!}"><i class="fa fa-circle-o"></i>Accounts</a>
+                           href="{!! route('admin.accounts.index') !!}"><i class="far fa-circle"></i>Accounts</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {!! active_class(Active::checkUriPattern('admin/users*')) !!}"
-                           href="{!! route('admin.users.index') !!}"><i class="fa fa-circle-o"></i>Users</a>
+                           href="{!! route('admin.users.index') !!}"><i class="far fa-circle"></i>Users</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {!! active_class(Active::checkUriPattern('admin/providers*')) !!}"
-                           href="{!! route('admin.providers.index') !!}"><i class="fa fa-circle-o"></i>Providers</a>
+                           href="{!! route('admin.providers.index') !!}"><i class="far fa-circle"></i>Providers</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {!! active_class(Active::checkUriPattern('admin/menuitems*')) !!}"
-                           href="{!! route('admin.menuitems.index') !!}"><i class="fa fa-circle-o"></i>Menu Items</a>
+                           href="{!! route('admin.menuitems.index') !!}"><i class="far fa-circle"></i>Menu Items</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {!! active_class(Active::checkUriPattern('admin/nolunchexceptions*')) !!}"
-                           href="{!! route('admin.nolunchexceptions.index') !!}"><i class="fa fa-circle-o"></i>No Lunch
+                           href="{!! route('admin.nolunchexceptions.index') !!}"><i class="far fa-circle"></i>No Lunch
                             Exceptions</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {!! active_class(Active::checkUriPattern('admin/lunchdates*')) !!}"
-                           href="{!! route('admin.lunchdates.index') !!}"><i class="fa fa-circle-o"></i>Schedule Lunches</a>
+                           href="{!! route('admin.lunchdates.index') !!}"><i class="far fa-circle"></i>Schedule Lunches</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {!! active_class(Active::checkUriPattern('admin/payments*')) !!}"
-                           href="{!! route('admin.payments.index') !!}"><i class="fa fa-circle-o"></i>Receive
+                           href="{!! route('admin.payments.index') !!}"><i class="far fa-circle"></i>Receive
                             Payments</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {!! active_class(Active::checkUriPattern('admin/ordermaint*')) !!}"
-                           href="{!! route('admin.ordermaint.index') !!}"><i class="fa fa-circle-o"></i>Order
+                           href="{!! route('admin.ordermaint.index') !!}"><i class="far fa-circle"></i>Order
                             Maintenance</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {!! active_class(Active::checkUriPattern('admin/reports*')) !!}"
-                           href="{!! route('admin.reports.index') !!}"><i class="fa fa-circle-o"></i>Admin Reports</a>
+                           href="{!! route('admin.reports.index') !!}"><i class="far fa-circle"></i>Admin Reports</a>
                     </li>
                     {{--<li class="nav-item">--}}
                     {{--<a class="nav-link {!! active_class(Active::checkUriPattern('admin/utilities*')) !!}"--}}
-                    {{--href="#"><i class="fa fa-circle-o"></i>Utilities</a>--}}
+                    {{--href="#"><i class="far fa-circle"></i>Utilities</a>--}}
                     {{--</li>--}}
                 </ul>
             </li>
@@ -91,7 +91,7 @@
                 <li class="nav-item" style="padding-bottom:10px;">
                     <a href="{!! route('logout') !!}"
                        onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                       class="nav-link"><i class="fa fa-sign-out"></i> Logout
+                       class="nav-link"><i class="material-icons">exit_to_app</i> Logout
                     </a>
                     {!! Form::open(['route' => 'logout', 'id' => 'logout-form']) !!}
                     {!! Form::close() !!}

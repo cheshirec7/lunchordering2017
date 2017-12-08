@@ -18,8 +18,8 @@
     <div class="col mx-auto mt-xl-4 mt-2">
         <div class="card">
             <div class="card-header">
-                {!! link_to_route('admin.accounts.create', 'New Account', [], ['class' => 'btn btn-success btn-sm pull-right', 'title' => 'New Account']) !!}
-                <h3><i class="fa fa-id-card-o"></i>Accounts</h3>
+                {!! link_to_route('admin.accounts.create', 'New Account', [], ['class' => 'btn btn-success btn-sm float-right', 'title' => 'New Account']) !!}
+                <h3><i class="fa fa-id-card"></i>Accounts</h3>
             </div>
             <div class="card-body">
                 @include('includes.partials.messages')

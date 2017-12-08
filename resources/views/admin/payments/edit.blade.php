@@ -16,7 +16,7 @@
     <div class="col maxw-500 mx-auto mt-xl-5 mt-md-3 mt-2">
         <div class="card">
             <div class="card-header">
-                <h3><i class="fa fa-pencil"></i>Edit Payment</h3>
+                <h3><i class="fa fa-pen-square"></i>Edit Payment</h3>
             </div>
             {!! Form::model($payment, ['method' => 'PUT', 'route' => ['admin.payments.update', $payment->id]]) !!}
             <div class="card-body">
@@ -31,7 +31,7 @@
                     {!! Form::label('credit_date', 'Date Received') !!}
                     <div class="input-group">
                         {!! Form::text('credit_date', $payment->credit_date->format('m/d/Y'), ['class' => 'form-control datepicker', 'required' => 'required']) !!}
-                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <div class="input-group-addon"><i class="far fa-calendar"></i></div>
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
                 <div class="form-group credit-amt">
                     {!! Form::label('credit_amt', 'Amount') !!}
                     <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                        <div class="input-group-addon"><i class="fa fa-money-bill-alt"></i></div>
                         <input type="text" class="form-control" name="credit_amt" id="credit_amt" required="required"
                                value="{!! $payment->credit_amt / 100 !!}">
                     </div>

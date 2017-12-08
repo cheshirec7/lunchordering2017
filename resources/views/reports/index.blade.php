@@ -4,7 +4,7 @@
     <div class="col maxw-500 mx-auto mt-xl-4 mt-md-3 mt-2">
         <div class="card">
             <div class="card-header">
-                <h3><i class="fa fa-file-text"></i>Lunch Report</h3>
+                <h3><i class="fa fa-sticky-note"></i>Lunch Report</h3>
             </div>
             <div class="card-body">
                 {!! Form::open(['method' => 'get', 'target' => '_blank', 'route' => ['dolunchreport']]) !!}

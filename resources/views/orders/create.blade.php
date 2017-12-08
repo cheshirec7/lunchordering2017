@@ -60,13 +60,13 @@
 
                 <hr/>
                 <div class="totals">
-                    <div id="ordertotal" class="pull-right">$0.00</div>
+                    <div id="ordertotal" class="float-right">$0.00</div>
                     <div id="ordertotaltext">Order Total</div>
                 </div>
                 <div class="lunchincludes">- {{ $lunchdate->provider_includes }} -</div>
             </div>
             <div class="card-footer">
-                {!! link_to('orders/'.$orderdate->startOfWeek()->format('Ymd').'?aid='.$accountid, 'Cancel', ['class' => 'btn a-button btn-cancel pull-right']) !!}
+                {!! link_to('orders/'.$orderdate->startOfWeek()->format('Ymd').'?aid='.$accountid, 'Cancel', ['class' => 'btn a-button btn-cancel float-right']) !!}
                 {!! Form::submit('Save', ['class' => 'btn btn-primary ']) !!}
             </div>
             {!! Form::close() !!}

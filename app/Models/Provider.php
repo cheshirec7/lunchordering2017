@@ -27,13 +27,13 @@ class Provider extends Model
 
     public function getEditButtonAttribute()
     {
-        return '<a href="' . route('admin.providers.edit', $this) . '" class="btn btn-sm btn-edit"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>';
+        return '<a href="' . route('admin.providers.edit', $this) . '" class="btn btn-sm btn-edit"><i class="fa fa-pen-square" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>';
     }
 
     public function getMenuItemButtonAttribute()
     {
         $route = route('admin.menuitems.index') . '?pid=' . $this->id;
-        return '<a href="' . $route . '" class="btn btn-sm btn-warning"><i class="fa fa-spoon" data-toggle="tooltip" data-placement="top" title="Attached Menu Items"></i></a>';
+        return '<a href="' . $route . '" class="btn btn-sm btn-warning"><i class="fa fa-utensil-spoon" data-toggle="tooltip" data-placement="top" title="Attached Menu Items"></i></a>';
     }
 
     public function getDeleteButtonAttribute()

@@ -13,7 +13,7 @@
             padding: 0;
         }
 
-        .scheduling .header .fa {
+        .scheduling .header svg {
             margin-right: 10px;
         }
 
@@ -137,7 +137,7 @@
                 {!! link_to_route('admin.lunchdates.show', '', $nextmonth->format('Ym'), ['class' => 'navbtn next']) !!}
                 <h3 id="monthyear">{!! $startmonth->format('F Y') !!}</h3>
                 {!! link_to_route('admin.lunchdates.show', '', $prevmonth->format('Ym'), ['class' => 'navbtn prev']) !!}
-                <h3><i class="fa fa-calendar"></i>Schedule Lunches</h3>
+                <h3><i class="far fa-calendar"></i>Schedule Lunches</h3>
             </div>
             <table id="scheduling-table" class="table table-bordered table-sm">
                 <thead class="thead-dark">

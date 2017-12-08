@@ -17,7 +17,7 @@
                     {!! Form::label('exception_date', 'Exception Date') !!}
                     <div class="input-group">
                         {!! Form::text('exception_date', null, ['class' => 'form-control datepicker', 'required' => 'required']) !!}
-                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <div class="input-group-addon"><i class="far fa-calendar"></i></div>
                     </div>
                 </div>
 

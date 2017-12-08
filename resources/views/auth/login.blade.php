@@ -61,7 +61,7 @@
                 </label>
             </div>
             <div class="card-footer">
-                {!! link_to_route('password.request', 'Forgot Your Password?', [], ['class' => 'btn btn-light pull-right']) !!}
+                {!! link_to_route('password.request', 'Forgot Your Password?', [], ['class' => 'btn btn-light float-right']) !!}
                 {!! Form::submit('Login', ['class' => 'btn btn-primary']) !!}
             </div>
 

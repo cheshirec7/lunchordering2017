@@ -15,7 +15,7 @@
     <div class="col maxw-500 mx-auto mt-xl-5 mt-md-3 mt-2">
         <div class="card">
             <div class="card-header">
-                <h3><i class="fa fa-pencil"></i>Edit Menu Item</h3>
+                <h3><i class="fa fa-pen-square"></i>Edit Menu Item</h3>
             </div>
             {!! Form::model($menuitem, ['method' => 'PUT', 'route' => ['admin.menuitems.update', $menuitem->id]]) !!}
             <div class="card-body">
@@ -39,7 +39,7 @@
                 <div class="form-group price">
                     {!! Form::label('price', 'Price') !!}
                     <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-dollar"></i></div>
+                        <div class="input-group-addon"><i class="fa fa-money-bill-alt"></i></div>
                         <input type="text" class="form-control" name="price" id="price"
                                required="required" value="{!! $menuitem->price / 100 !!}">
                     </div>

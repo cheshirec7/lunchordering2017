@@ -7,7 +7,7 @@
     <div class="col maxw-500 mx-auto mt-xl-5 mt-md-3 mt-2">
         <div class="card">
             <div class="card-header">
-                <h3><i class="fa fa-pencil"></i>Edit Lunch Exception</h3>
+                <h3><i class="fa fa-pen-square"></i>Edit Lunch Exception</h3>
             </div>
             {!! Form::model($nle, ['method' => 'PUT', 'route' => ['admin.nolunchexceptions.update', $nle->id]]) !!}
             <div class="card-body">
@@ -21,7 +21,7 @@
                         @else
                             {!! Form::text('exception_date', null, ['class' => 'form-control datepicker', 'required' => 'required']) !!}
                         @endif
-                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <div class="input-group-addon"><i class="far fa-calendar"></i></div>
                     </div>
                 </div>
 

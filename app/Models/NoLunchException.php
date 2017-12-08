@@ -36,7 +36,7 @@ class NoLunchException extends Model
 
     public function getEditButtonAttribute()
     {
-        return '<a href="' . route('admin.nolunchexceptions.edit', $this) . '" class="btn btn-sm btn-edit"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>';
+        return '<a href="' . route('admin.nolunchexceptions.edit', $this) . '" class="btn btn-sm btn-edit"><i class="fa fa-pen-square" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>';
     }
 
     public function getDeleteButtonAttribute()

@@ -24,6 +24,7 @@
     @stack('before-styles')
     <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i|Vollkorn:600" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
     <link rel="stylesheet" href="{!! mix('css/coreui.css') !!}">
     @stack('after-styles')
 </head>

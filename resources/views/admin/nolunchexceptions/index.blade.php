@@ -24,7 +24,7 @@
             <div class="card-body">
                 @include('includes.partials.messages')
                 {!! link_to_route('admin.nolunchexceptions.create', 'New Exception', [],
-                                    ['class' => 'btn btn-success btn-sm pull-right', 'title' => 'New Exception', 'id' => 'btnCreate']) !!}
+                                    ['class' => 'btn btn-success btn-sm float-right', 'title' => 'New Exception', 'id' => 'btnCreate']) !!}
                 <form class="form-inline">
                     <div class="form-group mb-1">
                         {!! Form::label('dates_to_show', 'Dates to show') !!}

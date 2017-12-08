@@ -18,7 +18,7 @@
                 @include('includes.partials.messages')
 
                 {!! link_to_route('admin.users.create', 'New User', ['aid' => $accountid],
-                    ['class' => 'btn btn-success btn-sm pull-right disabled', 'id' => 'btnCreate']) !!}
+                    ['class' => 'btn btn-success btn-sm float-right disabled', 'id' => 'btnCreate']) !!}
 
                 <div class="form-group row">
                     <label for="account_id" class="col-form-label ml-3">Account</label>

@@ -20,11 +20,11 @@
     <div class="col mx-auto mt-xl-4 mt-2">
         <div class="card">
             <div class="card-header">
-                <h3><i class="fa fa-spoon"></i>Menu Items</h3>
+                <h3><i class="fa fa-utensil-spoon"></i>Menu Items</h3>
             </div>
             <div class="card-body">
                 @include('includes.partials.messages')
-                {!! link_to_route('admin.menuitems.create', 'New Menu Item', ['pid' => $providerid], ['class' => 'btn btn-success btn-sm pull-right disabled', 'id' => 'btnCreate']) !!}
+                {!! link_to_route('admin.menuitems.create', 'New Menu Item', ['pid' => $providerid], ['class' => 'btn btn-success btn-sm float-right disabled', 'id' => 'btnCreate']) !!}
                 <div class="row mb-1">
                     <label for="provider_id" class="col-form-label ml-3">Provider</label>
                     <div class="mr-3 ml-3">
