@@ -11,6 +11,10 @@
                 <form class="form-inline">
                     <label for="account_id" class="mr-3">Order Lunches for Account</label>
                     {!! Form::select('account_id', $accounts, $accountid, ['class' => 'form-control custom-select']) !!}
+                    @if($avatar)
+                        <img class="avatar" style="margin-left: 10px;" src="{!! $avatar !!}" height="35"
+                             alt="User Image"/>
+                    @endif
                 </form>
             @endif
             <div class="ordering-header">

@@ -273,9 +273,12 @@ class OrdersController extends Controller
             $daterange = $start_week->format('F j') . ' - ' . $end_week->format('j, Y');
 
         $accounts = null;
+        $avatar = null;
         if (Gate::allows('manage-backend')) {
             $aid = $request->input('aid', Auth::id());
             $accounts = $this->accounts->getForSelect(Auth::id() == 1);
+            $account = Account::find($aid);
+            $avatar = \Gravatar::get($account->email, 'orderlunches');
         } else {
             $aid = Auth::id();
         }
@@ -287,7 +290,8 @@ class OrdersController extends Controller
             ->withCurweek($cur_week)
             ->withAccounts($accounts)
             ->withAccountid($aid)
-            ->withThetable($this->buildTheTable($aid, $start_week, $end_week));
+            ->withThetable($this->buildTheTable($aid, $start_week, $end_week))
+            ->withAvatar($avatar);
     }
 
     /**
