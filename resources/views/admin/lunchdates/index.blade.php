@@ -76,6 +76,7 @@
             padding: 15px 10px 10px;
             height: 120px;
             opacity: 0.5;
+            background-clip: padding-box;
         }
 
         .scheduling .table td div {
