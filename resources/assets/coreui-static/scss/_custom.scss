@@ -5,7 +5,6 @@ a, a:hover, .btn.btn-light {
 .form-control,
 .form-control:focus {
   color: #4285f4;
-  //color: #2962ff;
 }
 
 .custom-select {
@@ -84,13 +83,11 @@ h6, .h6 {
 .app-header.navbar .navbar-brand {
   border-bottom: none;
   background-image: url(/img/wlogo.png);
-  //background-image: url(/apple-touch-icon.png);
   background-color: transparent;
   background-size: 35px auto;
 }
 
 .user-panel {
-  //background-color: rgba(32, 168, 216, 0.05);
   background-color: #222;
   box-shadow: 0 1px 0 #222;
 }
@@ -106,17 +103,6 @@ h6, .h6 {
   width: 100%;
 }
 
-.sidebar .nav-link svg {
-  margin-right: 12px;
-}
-
-.sidebar .nav-link i.material-icons {
-  font-size: 16px;
-  vertical-align: bottom;
-  color: #fff;
-  margin-bottom: 1px;
-}
-
 .sidebar .nav-link.active,
 .sidebar .navbar .active.dropdown-toggle,
 .navbar .sidebar .active.dropdown-toggle {
@@ -127,18 +113,41 @@ h6, .h6 {
   display: none;
 }
 
-.sidebar .nav-dropdown-items .nav-link {
-  padding: 0.5rem;
+.sidebar .nav-link i.material-icons {
+  font-size: 20px;
+  vertical-align: bottom;
+  color: #fff;
+  margin-left: -2px;
 }
 
-.sidebar .nav-dropdown-items .nav-item {
-  font-size: 13px;
+.navbar .sidebar-minimized .dropdown-toggle i.material-icons,
+.sidebar-minimized .nav-link i.material-icons,
+.sidebar-minimized .navbar .dropdown-toggle i.material-icons {
+  font-size: 24px;
+  margin-top: -4px;
+}
+
+.sidebar .nav-link svg {
+  margin-right: 12px;
 }
 
 .sidebar .nav-dropdown-items svg {
-  margin: 5px 7px 0 20px;
+  margin: 0 7px 2px 10px;
   font-size: 8px;
-  vertical-align: top;
+}
+
+.sidebar-minimized .sidebar .nav-link svg,
+.sidebar-minimized .sidebar .navbar .dropdown-toggle svg {
+  display: block;
+  float: left;
+  width: 50px;
+  font-size: 18px;
+}
+
+.sidebar-minimized .sidebar .nav-dropdown-items .nav-link svg {
+  font-size: 8px;
+  margin: 5px 0 0;
+  width: 26px;
 }
 
 label {
@@ -162,13 +171,11 @@ label, .alert {
   box-shadow: none;
 }
 
-//.card-footer .btn-light,
 .btn-cancel {
   background: #e5e5e5 linear-gradient(180deg, #e5e5e5, #e5e5e5) repeat-x;
   border-color: #ddd;
 }
 
-//.card-footer .btn-light:hover,
 .btn-cancel:hover {
   background: #d9e1e6 linear-gradient(180deg, #dbe1e6, #d9e1e6) repeat-x;
   border-color: #d1dbe1;
@@ -402,7 +409,6 @@ label, .alert {
 .swal2-popup .swal2-content {
   padding: 15px 0 0 !important;
   color: #4285f4 !important;
-  //color: #2962ff;
 }
 
 @media (max-width: 767px) {
@@ -448,3 +454,4 @@ label, .alert {
     padding: 0 0.5rem;
   }
 }
+
