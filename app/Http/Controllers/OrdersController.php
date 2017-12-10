@@ -18,6 +18,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Database\Eloquent\Collection;
 
 class OrdersController extends Controller
 {
@@ -138,6 +139,7 @@ class OrdersController extends Controller
         }
 
         foreach ($users as $user) {
+//            dd($user);
 //            if ($has_addl)
 //                $res .= '<tr><td colspan="6" class="userrow dark"><i><small>Orders for</small></i> ' . $user->first_last . '</td></tr>';
 //            else
@@ -157,7 +159,14 @@ class OrdersController extends Controller
         return $res;
     }
 
-    private function getOrderCellHTML($aid, $cur_date, $today, $lunchdates, $nles, $user, $orders, $account, $animate)
+    /**
+     * Get the HTML for a cell
+     *
+     * @return string
+     */
+    private function getOrderCellHTML(int $aid, Carbon $cur_date, Carbon $today,
+                                      Collection $lunchdates, Collection $nles, User $user,
+                                      Collection $orders, Account $account, bool $animate) : string
     {
         $lunchdate_ptr = null;
         $nle_ptr = null;
@@ -255,8 +264,8 @@ class OrdersController extends Controller
      * start_week must always be a Monday
      *
      * @param Request $request
-     * @param  Carbon $start_week
-     * @param  Carbon $cur_week
+     * @param Carbon $start_week
+     * @param Carbon $cur_week
      * @return \Illuminate\Http\Response
      */
     private function viewWeekSchedule(Request $request, Carbon $start_week, Carbon $cur_week)
@@ -326,7 +335,7 @@ class OrdersController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, int $id)
     {
         try {
             $start_week = Carbon::createFromFormat('Ymd', $id)->setTime(0, 0, 0);
@@ -351,10 +360,13 @@ class OrdersController extends Controller
     /**
      * Display a day for date / user
      *
+     * @param int $date_ymd
+     * @param int $uid
+     * @param int $aid
      * @return \Illuminate\Http\Response
      * @throws AuthorizationException
      */
-    public function getDateUser($date_ymd, $uid, $aid)
+    public function getDateUser(int $date_ymd, int $uid, int $aid)
     {
         $user = User::find($uid);
         if (!$user)
@@ -437,7 +449,7 @@ class OrdersController extends Controller
     }
 
 
-    private function doOrdersShowDangerRedirect($id, $aid, $msg)
+    private function doOrdersShowDangerRedirect(int $id, int $aid, string $msg)
     {
         return redirect()
             ->route('orders.show', ['id' => $id, 'aid' => $aid])
@@ -452,11 +464,14 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        $mi_count = count($request['menuitems']);
-        if ($mi_count != count($request['qtys'])) {
-            return redirect()
-                ->route('orders.index')
-                ->withFlashDanger('Invalid menuitem / qty count.');
+        $mi_count = 0;
+        if ($request['menuitems']) {
+            $mi_count = count($request['menuitems']);
+            if ($mi_count != count($request['qtys'])) {
+                return redirect()
+                    ->route('orders.index')
+                    ->withFlashDanger('Invalid menuitem / qty count.');
+            }
         }
 
         $thedateYmd = $request->input('date', 0);
