@@ -158,7 +158,7 @@
 }
 
 .ordering .lunchestable td div.lunchtext {
-    padding: 20px 0;
+    padding: 1rem 0;
 }
 
 .ordering .lunchestable td.enabled div.lunchtext {
@@ -169,7 +169,7 @@
 .ordering .lunchestable td svg.fa-edit {
     color: #080;
     font-size: 1.5rem;
-    margin: .2rem 0;
+    margin: .2rem 0 1rem;
 }
 
 .ordering .lunchestable td div.ordertext {

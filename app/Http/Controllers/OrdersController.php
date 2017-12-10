@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
@@ -79,18 +80,14 @@ class OrdersController extends Controller
         $lunchdates = $this->lunchdates->getForOrders($start_week, $end_week);
         $nles = $this->nles->getForOrders($start_week, $end_week);
         $orders = $this->orders->getForOrders($start_week, $end_week);
-
         $today = Carbon::today();
-
         $providers_row = '';
         $lunchdates_row = '';
-//        $addl_row = '';
-//        $has_addl = false;
         $providerIDs = array(0, 0, 0, 0, 0);
         $res = '';
         $loopDate = $start_week->copy();
 
-        //build header, loop mon-fri
+        // build header, loop mon-fri
         for ($i = 0; $i < 5; $i++) {
             $todayclass = '';
             if ($loopDate->eq($today))
@@ -101,22 +98,12 @@ class OrdersController extends Controller
                     $providers_row .= '<a target="_blank" href="' . $lunchdate->provider_url . '">';
                     $providers_row .= '<img src="/img/providers/' . $lunchdate->provider_image . '" alt="' . $lunchdate->provider_name . '" title="' . $lunchdate->provider_name . '"></a>';
                     $providerIDs[$i] = $lunchdate->prov_id;
-
-//                    if ($lunchdate->additional_text || $lunchdate->extended_care_text)
-//                        $has_addl = true;
-//                    $addl_row .= '<th' . $todayclass . '>';
-//                    if ($lunchdate->additional_text)
-//                        $addl_row .= '<div class="addl">' . $lunchdate->additional_text . '</div>';
-//                    if ($lunchdate->extended_care_text)
-//                        $addl_row .= '<div class="ext">' . $lunchdate->extended_care_text . '</div>';
-//                    $addl_row .= '</th>';
                     break;
                 }
             }
 
             if ($providerIDs[$i] == 0) {
                 $providers_row .= '<img src="/img/providers/nolunches2017.png" alt="No Lunches Scheduled" title="No Lunches Scheduled">';
-//                $addl_row .= '<th' . $todayclass . '></th>';
             }
 
             $providers_row .= '</th>';
@@ -126,8 +113,6 @@ class OrdersController extends Controller
 
         $res .= '<tr class="providers"><th class="usercol"></th>' . $providers_row . '</tr>';
         $res .= '<tr class="lunchdates"><th class="usercol">Name</th>' . $lunchdates_row . '</tr>';
-//        if ($has_addl)
-//            $res .= '<tr class="addlmsg"><th class="usercol"></th>' . $addl_row . '</tr>';
 
         // build body
         try {
@@ -139,10 +124,6 @@ class OrdersController extends Controller
         }
 
         foreach ($users as $user) {
-//            dd($user);
-//            if ($has_addl)
-//                $res .= '<tr><td colspan="6" class="userrow dark"><i><small>Orders for</small></i> ' . $user->first_last . '</td></tr>';
-//            else
             $res .= '<tr><td colspan="6" class="userrow">' . $user->first_last . '</td></tr>';
             $res .= '<tr>';
             $res .= '<td class="usercol">' . $user->first_name . '<br />' . $user->last_name . '</td>';
@@ -166,7 +147,7 @@ class OrdersController extends Controller
      */
     private function getOrderCellHTML(int $aid, Carbon $cur_date, Carbon $today,
                                       Collection $lunchdates, Collection $nles, User $user,
-                                      Collection $orders, Account $account, bool $animate) : string
+                                      Collection $orders, Account $account, bool $animate): string
     {
         $lunchdate_ptr = null;
         $nle_ptr = null;
@@ -503,6 +484,8 @@ class OrdersController extends Controller
         }
 
         if ($mi_count > 0) {
+            DB::beginTransaction();
+
             $order = Order::create([
                 'account_id' => $user->account_id,
                 'user_id' => $uid,
@@ -526,6 +509,7 @@ class OrdersController extends Controller
             }
             $this->orderdetails->updateProvidersAndPrices($order->id);
             $this->orders->updateDescAndTotalPrice($order->id);
+            DB::commit();
         }
 
         $this->accounts->updateAccountAggregates($user->account_id);
