@@ -154,7 +154,7 @@
 .ordering .lunchestable td svg.fa-plus-circle {
     font-size: 3.5rem;
     color: #080;
-    margin: .3rem 0;
+    margin: 1rem 0 0.3rem;
 }
 
 .ordering .lunchestable td div.lunchtext {
