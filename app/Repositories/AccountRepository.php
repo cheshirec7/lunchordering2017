@@ -62,17 +62,6 @@ class AccountRepository extends BaseRepository
     /**
      * @return mixed
      */
-    public function getForOrders($account_id)
-    {
-        return $this->query()
-            ->select('active', 'allow_new_orders')
-            ->where('id', $account_id)
-            ->first();
-    }
-
-    /**
-     * @return mixed
-     */
     public function createCurBalAdjRecsForAllAccounts($req)
     {
         //        insert into los_payments (account_id, pay_method, credit_amt, fee, credit_date, credit_desc, created_at)

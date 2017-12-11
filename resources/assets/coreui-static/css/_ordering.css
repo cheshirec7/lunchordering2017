@@ -1,3 +1,7 @@
+.ordering .avatar {
+    margin-left: 0.5rem;
+}
+
 .ordering .lunchestable a,
 .ordering .lunchestable a:hover {
     color: #000;
@@ -104,19 +108,6 @@
     border-bottom: 1px solid #b9b921;
     border-left: 1px solid #b9b921;
 }
-
-/*.lunchestable tr.addlmsg th, .lunchestable tr.extcare th{*/
-/*background-color: #fafafa;*/
-/*font-size: 13px;*/
-/*line-height: 14px;*/
-/*font-weight: normal;*/
-/*text-align: center;*/
-/*vertical-align: middle;*/
-/*}*/
-
-/*.lunchestable tr.extcare th {*/
-/*color: #c00;*/
-/*}*/
 
 .ordering .lunchestable tr.lunchdates th div:first-child {
     display: inline;
@@ -232,8 +223,6 @@
 
 @keyframes cellanimate {
     0% {
-        /*opacity: 0;*/
-        /*background-color: #eff3f9;*/
         box-shadow: 0 0 0 green;
         transform: translateZ(0px);
     }
@@ -242,8 +231,6 @@
         transform: translateZ(200px);
     }
     100% {
-        /*opacity: 1;*/
-        /*background-color: #ffffff;*/
         box-shadow: 0 0 0 green;
         transform: translateZ(0px);
     }
@@ -259,6 +246,15 @@
     animation-fill-mode: none;
     animation-play-state: running;
 
+}
+
+.ordering #viewBy.btn {
+    color: #5790eb;
+    padding: 0;
+}
+
+.ordering .dropdown {
+    display: inline;
 }
 
 @media (max-width: 320px) {

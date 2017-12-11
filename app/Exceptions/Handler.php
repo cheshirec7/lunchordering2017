@@ -56,9 +56,11 @@ class Handler extends ExceptionHandler
 //                ->withFlashInfo('Your form has expired. Please refresh the page and try again.');
         }
 
-        if ($exception instanceof \Illuminate\Auth\Access\AuthorizationException) {
+        if (($exception instanceof \Illuminate\Auth\Access\AuthorizationException) ||
+            ($exception instanceof \GuzzleHttp\Exception\ClientException) ||
+            ($exception instanceof \Laravel\Socialite\Two\InvalidStateException)) {
             return redirect()
-                ->route('home')
+                ->route('login')
                 ->withFlashDanger('Unauthorized.');
         }
 

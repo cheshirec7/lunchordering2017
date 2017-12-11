@@ -67,25 +67,26 @@ class OrdersController extends Controller
     }
 
     /**
-     * Build weeks of orders for all users
+     * Build weeks of orders for all users for an account
      *
-     * @param  Carbon $start_week
-     * @param  Carbon $end_week
+     * @param Account $account
+     * @param Collection $users
+     * @param Carbon $start_date
+     * @param Carbon $end_date
      * @return string
      */
-    private function buildTheTable($aid, Carbon $start_week, Carbon $end_week)
+    private function buildTheWeeksUsersTable(Account $account, Collection $users, Carbon $start_date, Carbon $end_date): string
     {
-        $account = $this->accounts->getForOrders($aid);
-        $users = $this->users->getForOrders($aid);
-        $lunchdates = $this->lunchdates->getForOrders($start_week, $end_week);
-        $nles = $this->nles->getForOrders($start_week, $end_week);
-        $orders = $this->orders->getForOrders($start_week, $end_week);
         $today = Carbon::today();
+//        dd($today);
+        $lunchdates = $this->lunchdates->getForOrders($start_date, $end_date);
+        $nles = $this->nles->getForOrders($start_date, $end_date);
+        $orders = $this->orders->getForOrders($start_date, $end_date);
         $providers_row = '';
         $lunchdates_row = '';
         $providerIDs = array(0, 0, 0, 0, 0);
         $res = '';
-        $loopDate = $start_week->copy();
+        $loopDate = $start_date->copy();
 
         // build header, loop mon-fri
         for ($i = 0; $i < 5; $i++) {
@@ -128,10 +129,11 @@ class OrdersController extends Controller
             $res .= '<tr>';
             $res .= '<td class="usercol">' . $user->first_name . '<br />' . $user->last_name . '</td>';
 
-            $loopDate = $start_week->copy();
+            $loopDate = $start_date->copy();
             for ($i = 0; $i < 5; $i++) {
                 $animate = ($aniDate && $loopDate->eq($aniDate) && $user->id == $aniUserid);
-                $res .= $this->getOrderCellHTML($aid, $loopDate, $today, $lunchdates, $nles, $user, $orders, $account, $animate);
+                $res .= $this->getOrderCellHTML($account, $user, $lunchdates, $nles, $orders,
+                    $loopDate, $today, $animate, true);
                 $loopDate->addDay();
             }
             $res .= '</tr>';
@@ -141,13 +143,69 @@ class OrdersController extends Controller
     }
 
     /**
-     * Get the HTML for a cell
+     * Build a month orders for a user
      *
+     * @param Account $account
+     * @param User $user
+     * @param Carbon $start_month
      * @return string
      */
-    private function getOrderCellHTML(int $aid, Carbon $cur_date, Carbon $today,
-                                      Collection $lunchdates, Collection $nles, User $user,
-                                      Collection $orders, Account $account, bool $animate): string
+    private function buildTheMonthUserTable(Account $account, User $user, Carbon $start_month): string
+    {
+        $today = Carbon::today();
+        $start_date = $start_month->copy()->startOfMonth()->startOfWeek();
+        $end_date = $start_month->copy()->endOfMonth()->endOfWeek();
+
+        $lunchdates = $this->lunchdates->getForOrders($start_date, $end_date);
+        $nles = $this->nles->getForOrders($start_date, $end_date);
+        $orders = $this->orders->getForOrders($start_date, $end_date);
+        $res = '';
+
+        try {
+            $aniDate = Carbon::createFromFormat('Ymd', session('ani-date'))->setTime(0, 0, 0);
+            $aniUserid = session('ani-userid');
+        } catch (\Exception $e) {
+            $aniDate = null;
+            $aniUserid = 0;
+        }
+
+        $loopDate = $start_date;
+        while ($loopDate->lte($end_date)) {
+            if ($loopDate->isWeekend()) {
+                $loopDate->addDay();
+                continue;
+            }
+            if ($loopDate->isMonday())
+                $res .= '<tr>';
+            $animate = ($aniDate && $loopDate->eq($aniDate) && $user->id == $aniUserid);
+
+            $res .= $this->getOrderCellHTML($account, $user, $lunchdates, $nles, $orders,
+                $loopDate, $today, $animate, false);
+            if ($loopDate->isFriday())
+                $res .= '</tr>';
+            $loopDate->addDay();
+        }
+
+        return $res;
+    }
+
+    /**
+     * Get the HTML for a cell
+     * @param Account $account
+     * @param User $user
+     * @param Collection $lunchdates
+     * @param Collection $nles
+     * @param Collection $orders
+     * @param Carbon $cur_date
+     * @param Carbon $today
+     * @param bool $animate
+     * @param bool $forWeeks
+     * @return string
+     */
+    private function getOrderCellHTML(Account $account, User $user,
+                                      Collection $lunchdates, Collection $nles, Collection $orders,
+                                      Carbon $cur_date, Carbon $today,
+                                      bool $animate, bool $forWeeks): string
     {
         $lunchdate_ptr = null;
         $nle_ptr = null;
@@ -164,8 +222,11 @@ class OrdersController extends Controller
         if (is_null($lunchdate_ptr)) {
             if ($cur_date->eq($today))
                 return '<td class="today"><div class="spacer">No<br/>Lunches<br/>Scheduled</div></td>';
-            else
-                return '<td><div class="spacer">No<br/>Lunches<br/>Scheduled</div></td>';
+
+            if ($cur_date->gt($today))
+                return '<td class="white"></td>';
+
+            return '<td><div class="spacer"></div></td>';
         }
 
         // check for exception
@@ -188,7 +249,11 @@ class OrdersController extends Controller
             }
         }
 
-        $body = '';
+        if ($forWeeks) {
+            $body = '';
+        } else {
+            $body = '<div class="dayno">' . $cur_date->day . '</div>';
+        }
         $editable = false;
         if ($nle_ptr) {
             $body .= '<div class="nlereason">' . $nle_ptr->reason . '</div>';
@@ -201,8 +266,15 @@ class OrdersController extends Controller
                 $body .= '<div class="fa fa-edit"></div>';
         } else if ($cur_date->gt($today) && !$lunchdate_ptr->orders_placed && $lunchdate_ptr->allow_orders) {
             if ($user->allowed_to_order && $account->allow_new_orders && $account->active) {
-                $body .= '<div class="fa fa-plus-circle"></div>';
-                $body .= '<div class="ordertext">Order</div>';
+                if (!$forWeeks) {
+                    $body .= '<img class="provider" src="/img/providers/' .
+                        $lunchdate->provider_image . '" alt="' .
+                        $lunchdate->provider_name . '" title="' . $lunchdate->provider_name . '">';
+                }
+                $body .= '<i class="fa fa-plus-circle"></i>';
+                if ($forWeeks) {
+                    $body .= '<div class="ordertext">Order</div>';
+                }
                 $editable = true;
             } else {
                 $body .= '<div class="nlo">Lunch<br />Ordering<br />Disabled</div>';
@@ -210,7 +282,14 @@ class OrdersController extends Controller
         } else if ($lunchdate_ptr->allow_orders) {
             $body .= '<div class="nlo">No Lunch<br />Ordered</div>';
         } else if ($lunchdate_ptr->prov_id == config('app.provider_lunchprovided_id')) {
-            $body .= '<div class="spacer">Lunch Provided By School</div>';
+            if ($forWeeks) {
+                $body .= '<div class="spacer">Lunch Provided By School</div>';
+            } else {
+                $body .= '<div><img class="provider" src="/img/providers/' .
+                    $lunchdate->provider_image . '" alt="' .
+                    $lunchdate->provider_name . '" title="' . $lunchdate->provider_name . '"></div>';
+                $body .= '<div class="provided">Lunch Provided By School</div>';
+            }
         }
 
         if ($lunchdate_ptr->additional_text) {
@@ -222,6 +301,9 @@ class OrdersController extends Controller
         }
 
         $classes = '';
+        if ($cur_date->gte($today))// || ($cur_date->lt($today) && $editable))
+            $classes .= 'white ';
+
         if ($cur_date->eq($today))
             $classes .= 'today ';
 
@@ -235,7 +317,7 @@ class OrdersController extends Controller
             $classes = ' class="' . $classes . '"';
 
         if ($editable)
-            return '<td' . $classes . '><a href="/orders/' . $cur_date->format('Ymd') . '/' . $user->id . '/' . $aid . '">' . $body . '</a></td>';
+            return '<td' . $classes . '><a href="/orders/' . $cur_date->format('Ymd') . '/' . $user->id . '/' . $account->id . '">' . $body . '</a></td>';
         else
             return '<td' . $classes . '>' . $body . '</td>';
     }
@@ -244,12 +326,18 @@ class OrdersController extends Controller
      * Display a week of orders
      * start_week must always be a Monday
      *
-     * @param Request $request
+     * @param Account $account
+     * @param Collection $users
      * @param Carbon $start_week
      * @param Carbon $cur_week
+     * @param array $accounts
+     * @param string $avatar
      * @return \Illuminate\Http\Response
      */
-    private function viewWeekSchedule(Request $request, Carbon $start_week, Carbon $cur_week)
+    private function viewWeekSchedule(Account $account, Collection $users,
+                                      Carbon $start_week, Carbon $cur_week,
+                                      array $accounts = null, string $avatar = null,
+                                      bool $showViewBy)
     {
         $end_week = $start_week->copy()->addDay(4);
         $next_week = $start_week->copy()->addWeek(1);
@@ -262,30 +350,49 @@ class OrdersController extends Controller
         } else
             $daterange = $start_week->format('F j') . ' - ' . $end_week->format('j, Y');
 
-        $accounts = null;
-        $avatar = null;
-        if (Gate::allows('manage-backend')) {
-            $aid = $request->input('aid', Auth::id());
-            $accounts = $this->accounts->getForSelect(Auth::id() == 1);
-            $account = Account::find($aid);
-            $avatar = \Gravatar::get($account->email, 'orderlunches');
-        } else {
-            $aid = Auth::id();
-        }
-
         return view('orders.index')
             ->withPrevweek($prev_week)
             ->withDaterange($daterange)
             ->withNextweek($next_week)
             ->withCurweek($cur_week)
             ->withAccounts($accounts)
-            ->withAccountid($aid)
-            ->withThetable($this->buildTheTable($aid, $start_week, $end_week))
-            ->withAvatar($avatar);
+            ->withAccountid($account->id)
+            ->withThetable($this->buildTheWeeksUsersTable($account, $users, $start_week, $end_week))
+            ->withAvatar($avatar)
+            ->withShowviewby($showViewBy);
     }
 
     /**
-     * Get the Monday of the current week
+     * Display a month of orders for a single user
+     * @param Carbon $start_date
+     * @param Account $account
+     * @param Collection $users
+     * @param array $accounts
+     * @param string $avatar
+     * @return \Illuminate\Http\Response
+     */
+    private function viewMonthSchedule(Carbon $start_date,
+                                       Account $account, Collection $users,
+                                       array $accounts = null, string $avatar = null,
+                                       bool $showViewBy)
+    {
+        $cur_month = $start_date->startOfMonth();
+        $next_month = $cur_month->copy()->addMonth(1);
+        $prev_month = $cur_month->copy()->subMonth(1);
+        return view('orders.bymonth')
+            ->withPrevmonth($prev_month)
+            ->withNextmonth($next_month)
+            ->withCurmonth($cur_month)
+            ->withAccounts($accounts)
+            ->withAccountid($account->id)
+            ->withUser($users->first())
+            ->withThetable($this->buildTheMonthUserTable($account, $users->first(), $cur_month))
+            ->withAvatar($avatar)
+            ->withShowviewby($showViewBy);
+    }
+
+    /**
+     * Get the Monday of the "current" week
      *
      * @return Carbon
      */
@@ -301,32 +408,85 @@ class OrdersController extends Controller
     }
 
     /**
+     * Get globals
+     *
+     * @param Request $request
+     * @param $aid
+     * @param $accounts
+     * @param $account
+     * @param $users
+     * @param $avatar
+     * @return mixed
+     */
+    private function getGlobals(Request $request, &$account, &$users, &$accounts, &$avatar)
+    {
+        if (Gate::allows('manage-backend')) {
+            $aid = $request->input('aid', Auth::id());
+            if (Auth::id() != $aid)
+                $account = Account::find($aid);
+            else
+                $account = $request->user();
+            $accounts = $this->accounts->getForSelect(Auth::id() == 1);
+            $avatar = \Gravatar::get($account->email, 'orderlunches');
+        } else {
+            $aid = Auth::id();
+            $account = $request->user();
+        }
+        $users = $this->users->getForOrders($aid);
+    }
+
+    /**
      * Display orders for the current week for all users.
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $start_week = $this->getCurWeek();
-        return $this->viewWeekSchedule($request, $start_week, $start_week);
+        $account = $users = $accounts = $avatar = null;
+        $this->getGlobals($request, $account, $users, $accounts, $avatar);
+
+        $viewBy = $request->input('vb', 'w');
+        $user_count = count($users);
+        if ($user_count > 1 || ($user_count == 1 && $viewBy == 'w')) {
+            session(['viewby' => 'w']);
+            $start_week = $this->getCurWeek();
+            return $this->viewWeekSchedule($account, $users, $start_week, $start_week, $accounts, $avatar, $user_count == 1);
+        } else {
+            session(['viewby' => 'm']);
+            return $this->viewMonthSchedule(Carbon::today(), $account, $users, $accounts, $avatar, $user_count == 1);
+        }
     }
 
     /**
      * Display a week of orders using the passed in date (yearweekday)
      * @param Request $request
+     * @param int $id (Ymd format)
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, int $id)
     {
         try {
-            $start_week = Carbon::createFromFormat('Ymd', $id)->setTime(0, 0, 0);
+            $start_date = Carbon::createFromFormat('Ymd', $id)->setTime(0, 0, 0);
         } catch (\Exception $e) {
             return redirect()->route('orders.index')
                 ->withFlashDanger('Invalid date specified.');
         }
 
-        $cur_week = $this->getCurWeek();
-        return $this->viewWeekSchedule($request, $start_week->startOfWeek(), $cur_week);
+        $account = $users = $accounts = $avatar = null;
+        $this->getGlobals($request, $account, $users, $accounts, $avatar);
+
+        $viewBy = $request->input('vb', 'w');
+        $user_count = count($users);
+
+        if ($user_count > 1 || ($user_count == 1 && $viewBy == 'w')) {
+            session(['viewby' => 'w']);
+            return $this->viewWeekSchedule($account, $users,
+                $start_date->startOfWeek(), $this->getCurWeek(),
+                $accounts, $avatar, $user_count == 1);
+        } else {
+            session(['viewby' => 'm']);
+            return $this->viewMonthSchedule($start_date, $account, $users, $accounts, $avatar, $user_count == 1);
+        }
     }
 
 
@@ -433,7 +593,7 @@ class OrdersController extends Controller
     private function doOrdersShowDangerRedirect(int $id, int $aid, string $msg)
     {
         return redirect()
-            ->route('orders.show', ['id' => $id, 'aid' => $aid])
+            ->route('orders.show', ['id' => $id, 'aid' => $aid, 'vb' => session('viewby')])
             ->withFlashDanger($msg);
     }
 
@@ -518,7 +678,7 @@ class OrdersController extends Controller
         session()->flash('ani-date', $thedateYmd);
 
         return redirect()
-            ->route('orders.show', ['id' => $thedateYmd, 'aid' => $aid]);
+            ->route('orders.show', ['id' => $thedateYmd, 'aid' => $aid, 'vb' => session('viewby')]);
 //            ->withFlashSuccess('Order saved.');
     }
 }

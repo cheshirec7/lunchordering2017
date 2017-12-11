@@ -12,7 +12,7 @@
             </div>
             <div class="date-user-header">
                 @if(!empty($avatar))
-                <img class="avatar" src="{!! $avatar !!}" alt="User Image"/>
+                    <img class="avatar" src="{!! $avatar !!}" alt="User Image"/>
                 @endif
                 {!! $orderdate->format('l, F jS, Y') !!}<br/>{!! $user->first_last !!}
             </div>
@@ -66,7 +66,7 @@
                 <div class="lunchincludes">- {{ $lunchdate->provider_includes }} -</div>
             </div>
             <div class="card-footer">
-                {!! link_to('orders/'.$orderdate->startOfWeek()->format('Ymd').'?aid='.$accountid, 'Cancel', ['class' => 'btn a-button btn-cancel float-right']) !!}
+                {!! link_to('orders/'.$orderdate->startOfWeek()->format('Ymd').'?aid='.$accountid.'&vb='.session('viewby'), 'Cancel', ['class' => 'btn a-button btn-cancel float-right']) !!}
                 {!! Form::submit('Save', ['class' => 'btn btn-primary ']) !!}
             </div>
             {!! Form::close() !!}
