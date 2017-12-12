@@ -117,7 +117,7 @@
     height: 140px;
     font-size: 14px;
     line-height: 17px;
-    padding: 0.4rem;
+    padding: 1rem;
 }
 
 .ordering .lunchestable td.enabled:hover {
@@ -139,33 +139,28 @@
 }
 
 .ordering .lunchestable td div {
-    padding-bottom: 8px;
+    padding: 4px 0;
 }
 
 .ordering .lunchestable td svg.fa-plus-circle {
     font-size: 3.5rem;
     color: #080;
-    margin: 1rem 0 0.3rem;
-}
-
-.ordering .lunchestable td div.lunchtext {
-    padding: 1rem 0;
 }
 
 .ordering .lunchestable td.enabled div.lunchtext {
     color: #080;
-    padding-bottom: 2px;
+    padding-bottom: 6px;
 }
 
 .ordering .lunchestable td svg.fa-edit {
     color: #080;
-    font-size: 1.5rem;
-    margin: .2rem 0 1rem;
+    font-size: 1.9rem;
+    padding-bottom: 8px;
 }
 
 .ordering .lunchestable td div.ordertext {
     color: #080;
-    padding: 4px 0 6px;
+    padding-top: 8px;
 }
 
 .ordering .lunchestable td div.spacer {
@@ -177,6 +172,7 @@
     background-color: #fafafa;
     color: #666;
     font-size: 12px;
+    padding: 0.4rem;
 }
 
 .ordering .lunchestable tr:last-child td a,
@@ -195,7 +191,6 @@
 
 .ordering .lunchestable td div.nlo {
     font-variant: small-caps;
-    margin: 1rem 0;
     font-family: 'Vollkorn', serif;
     font-weight: 600;
     color: #ccc;
@@ -208,17 +203,11 @@
 }
 
 .ordering .lunchestable td div.nlereason {
-    padding-top: 1rem;
     color: #4285f4;
 }
 
 .ordering .lunchestable td div.nledesc {
     color: #4285f4;
-}
-
-.ordering .lunchestable td div.nledesc,
-.ordering .lunchestable td div.ordertext {
-    padding-bottom: 1rem;
 }
 
 @keyframes cellanimate {
@@ -245,7 +234,6 @@
     animation-iteration-count: 1;
     animation-fill-mode: none;
     animation-play-state: running;
-
 }
 
 .ordering #viewBy.btn {
@@ -329,15 +317,15 @@
         height: 80px;
         font-size: 11px;
         line-height: 13px;
+        padding: 0.4rem;
     }
 
     .ordering .lunchestable td svg.fa-plus-circle {
         font-size: 2rem;
-        /*padding: 8px 0 0;*/
     }
 
     .ordering .lunchestable td div.ordertext {
-        padding-bottom: 8px;
+        padding-top: 4px;
     }
 
     .ordering .lunchestable td div.nlo {
@@ -346,7 +334,7 @@
     }
 
     .ordering .lunchestable td svg.fa-edit {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
     }
 
     .ordering .alert {
