@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \App\Console\Commands\KeepAlive::class,
     ];
 
     /**
@@ -30,6 +30,8 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('keepalive:touchdb')
             ->everyTenMinutes();
+
+//        php-cli -q ~/public_html/cca/laravel/artisan keepalive:touchdb >/dev/null 2>&1
 
 //        $schedule->call(function () {
 //
