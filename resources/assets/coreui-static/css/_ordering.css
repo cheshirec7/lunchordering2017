@@ -138,29 +138,48 @@
     background-color: #ffc;
 }
 
-.ordering .lunchestable td div {
+.ordering .lunchestable td * {
     padding: 4px 0;
 }
 
 .ordering .lunchestable td svg.fa-plus-circle {
-    font-size: 3.5rem;
+    font-size: 3.7rem;
     color: #080;
 }
 
 .ordering .lunchestable td.enabled div.lunchtext {
     color: #080;
-    padding-bottom: 6px;
 }
 
 .ordering .lunchestable td svg.fa-edit {
     color: #080;
     font-size: 1.9rem;
-    padding-bottom: 8px;
 }
 
 .ordering .lunchestable td div.ordertext {
     color: #080;
     padding-top: 8px;
+}
+
+.ordering .lunchestable td div.extcare {
+    color: #c00;
+}
+
+.ordering .lunchestable td div.nlereason {
+    color: #4285f4;
+}
+
+.ordering .lunchestable td div.nledesc {
+    color: #4285f4;
+}
+
+.ordering .lunchestable td div.nlo {
+    font-variant: small-caps;
+    font-family: 'Vollkorn', serif;
+    font-weight: 600;
+    color: #ccc;
+    font-size: 18px;
+    line-height: 18px;
 }
 
 .ordering .lunchestable td div.spacer {
@@ -187,27 +206,6 @@
     margin: 0 3px -1px 0;
     display: inline-block;
     background-color: #ffc;
-}
-
-.ordering .lunchestable td div.nlo {
-    font-variant: small-caps;
-    font-family: 'Vollkorn', serif;
-    font-weight: 600;
-    color: #ccc;
-    font-size: 18px;
-    line-height: 18px;
-}
-
-.ordering .lunchestable td div.extcare {
-    color: #c00;
-}
-
-.ordering .lunchestable td div.nlereason {
-    color: #4285f4;
-}
-
-.ordering .lunchestable td div.nledesc {
-    color: #4285f4;
 }
 
 @keyframes cellanimate {
@@ -321,7 +319,7 @@
     }
 
     .ordering .lunchestable td svg.fa-plus-circle {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
 
     .ordering .lunchestable td div.ordertext {
