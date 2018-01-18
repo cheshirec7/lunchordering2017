@@ -31,7 +31,6 @@
                             <thead>
                             <tr>
                                 <th></th>
-                                <th></th>
                                 <th>Qty</th>
                             </tr>
                             </thead>
@@ -46,7 +45,6 @@
                         <table class="lunchestable col2">
                             <thead>
                             <tr>
-                                <th></th>
                                 <th></th>
                                 <th>Qty</th>
                             </tr>
@@ -88,9 +86,6 @@
                         $this.val(1);
                     }
                     recalcTotal();
-                }),
-                $ccd = $('.custom-control-description', '.lunchestable').click(function (e) {
-                    $('#cci' + $(this).data('ccd'), '.lunchestable').trigger('click');
                 });
 
             function recalcTotal() {

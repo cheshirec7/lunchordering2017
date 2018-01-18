@@ -343,27 +343,12 @@ label, .alert {
   font-size: unset;
 }
 
-.custom-checkbox .custom-control-indicator {
-  top: .15rem;
-  background-color: transparent;
-  border: 1px solid #5a5a5a;
-  border-radius: 2px;
+.custom-control-label::before {
+  background: #ddd;
 }
 
-.custom-control-input:checked ~ .custom-control-indicator {
-  background-size: 10px;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-.custom-radio .custom-control-description {
-  line-height: 16px;
-  margin-top: 4px;
-}
-
-.custom-checkbox .custom-control-description {
-  line-height: 17px;
-  margin-top: 3px;
+.custom-checkbox .custom-control-input:disabled ~ .custom-control-label::before {
+  background: #c2cfd6;
 }
 
 .datepicker {

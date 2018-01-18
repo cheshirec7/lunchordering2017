@@ -72,11 +72,6 @@
     padding: 4px 0;
 }
 
-.orderlunches .lunchestable td:first-child,
-.orderlunches .lunchestable td:last-child {
-    width: 1px;
-}
-
 .orderlunches .lunchestable input[type=number] {
     padding: 0;
     border: 1px solid #ccc;
@@ -102,31 +97,13 @@
     margin-right: 3px;
 }
 
-.orderlunches .custom-control {
-    min-height: unset;
-    padding: 0;
-    display: block;
-}
-
-.orderlunches .custom-checkbox .custom-control-indicator {
-    position: relative;
-    top: 0;
-}
-
-.orderlunches .custom-control-description {
-    line-height: 16px;
-    cursor: default;
-    user-select: none;
-    margin-top: 1px;
-}
-
 @media (max-width: 767px) {
 
     .orderlunches .lunchestable.col2 thead {
         display: none;
     }
 
-    .orderlunches .custom-control-description {
+    .orderlunches .custom-control-label {
         font-size: 13px;
         line-height: 14px;
     }

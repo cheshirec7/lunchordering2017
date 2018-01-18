@@ -21,7 +21,9 @@
                         @else
                             {!! Form::text('exception_date', null, ['class' => 'form-control datepicker', 'required' => 'required']) !!}
                         @endif
-                        <div class="input-group-addon"><i class="far fa-calendar"></i></div>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="far fa-calendar"></i></span>
+                        </div>
                     </div>
                 </div>
 

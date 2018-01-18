@@ -33,13 +33,9 @@
                     </div>
                 @endif
 
-                <div class="form-check">
-                    <label class="custom-control custom-checkbox">
-                        <input class="custom-control-input" type="checkbox"
-                               name="sendcopy" id="sendcopy">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Send a copy to my email address</span>
-                    </label>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="sendcopy" id="sendcopy">
+                    <label class="custom-control-label" for="sendcopy">Send a copy to my email address</label>
                 </div>
             </div>
 

@@ -74,7 +74,9 @@
                                     {!! Form::label('credit_date', 'Receive Date') !!}
                                     <div class="input-group">
                                         {!! Form::text('credit_date', $date, ['class' => 'form-control datepicker', 'required' => 'required']) !!}
-                                        <div class="input-group-addon"><i class="far fa-calendar"></i></div>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-calendar"></i></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

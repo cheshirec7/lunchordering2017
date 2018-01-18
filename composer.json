@@ -18,9 +18,9 @@
     "laravel/socialite": "^3.0",
     "laravel/tinker": "~1.0",
     "laravelcollective/html": "^5.5.1",
-    "silber/bouncer": "v1.0.0-beta.4",
-    "srmklive/paypal": "~1.0",
-    "yajra/laravel-datatables-oracle": "~8.0"
+    "silber/bouncer": "v1.0.0-beta.5",
+    "srmklive/paypal": "~1.5.8",
+    "yajra/laravel-datatables-oracle": "~8.3.3"
   },
   "require-dev": {
     "barryvdh/laravel-debugbar": "^3.1",

@@ -12,6 +12,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class MenuItemsController extends Controller
 {
@@ -215,6 +216,9 @@ class MenuItemsController extends Controller
         }
 
         try {
+            DB::table('los_lunchdate_menuitems')
+                ->where('menuitem_id', $id)
+                ->delete();
             $menuitem->delete();
             session()->flash('flash_success', "Menu item '" . $menuitem->item_name . "' was deleted.");
         } catch (\Exception $e) {

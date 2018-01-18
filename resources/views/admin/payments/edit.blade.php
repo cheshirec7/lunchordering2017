@@ -31,7 +31,9 @@
                     {!! Form::label('credit_date', 'Date Received') !!}
                     <div class="input-group">
                         {!! Form::text('credit_date', $payment->credit_date->format('m/d/Y'), ['class' => 'form-control datepicker', 'required' => 'required']) !!}
-                        <div class="input-group-addon"><i class="far fa-calendar"></i></div>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="far fa-calendar"></i></span>
+                        </div>
                     </div>
                 </div>
 
@@ -48,7 +50,9 @@
                 <div class="form-group credit-amt">
                     {!! Form::label('credit_amt', 'Amount') !!}
                     <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-money-bill-alt"></i></div>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-money-bill-alt"></i></span>
+                        </div>
                         <input type="text" class="form-control" name="credit_amt" id="credit_amt" required="required"
                                value="{!! $payment->credit_amt / 100 !!}">
                     </div>

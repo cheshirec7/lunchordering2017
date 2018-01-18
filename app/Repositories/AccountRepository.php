@@ -162,19 +162,19 @@ class AccountRepository extends BaseRepository
             ->get();
 
         $a1 = array('0' => '- Select -');
-        $a2 = array();
-        $a3 = array();
+//        $a2 = array();
+//        $a3 = array();
         foreach ($accounts as $account) {
             $bal = $account->total_debits + $account->fees - $account->confirmed_credits;
             if ($bal > 0)
                 $a1[$account->id] = $account->account_name . '&nbsp;&nbsp;(DUE: ' . money_format('$%.2n', $bal / 100) . ')&nbsp;';
             else if ($bal == 0)
-                $a2[$account->id] = $account->account_name . '&nbsp;&nbsp;(Bal: $0.00)&nbsp;';
+                $a1[$account->id] = $account->account_name . '&nbsp;&nbsp;(Bal: $0.00)&nbsp;';
             else
-                $a3[$account->id] = $account->account_name . '&nbsp;&nbsp;(Credit: ' . money_format('$%.2n', -$bal / 100) . ')&nbsp;';
+                $a1[$account->id] = $account->account_name . '&nbsp;&nbsp;(Credit: ' . money_format('$%.2n', -$bal / 100) . ')&nbsp;';
         }
 
-        return $a1 + $a2 + $a3;
+        return $a1;// + $a2 + $a3;
     }
 
     /**

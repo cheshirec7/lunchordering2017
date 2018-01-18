@@ -8,22 +8,17 @@
             </div>
             <div class="card-body">
                 {!! Form::open(['method' => 'get', 'target' => '_blank', 'route' => ['dolunchreport']]) !!}
-                <div class="custom-controls-stacked">
-                    <label class="custom-control custom-radio">
-                        <input name="rpttype" type="radio" class="custom-control-input" checked value="0">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Show only dates with orders</span>
-                    </label>
-                    <label class="custom-control custom-radio">
-                        <input name="rpttype" type="radio" class="custom-control-input" value="1">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Show dates with orders or events</span>
-                    </label>
-                    <label class="custom-control custom-radio">
-                        <input name="rpttype" type="radio" class="custom-control-input" value="2">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Show all dates</span>
-                    </label>
+                <div class="custom-control custom-radio m-1">
+                    <input type="radio" id="rpttype1" name="rpttype" class="custom-control-input" value="0" checked>
+                    <label class="custom-control-label" for="rpttype1">Show only dates with orders</label>
+                </div>
+                <div class="custom-control custom-radio m-1">
+                    <input type="radio" id="rpttype2" name="rpttype" class="custom-control-input" value="1">
+                    <label class="custom-control-label" for="rpttype2">Show dates with orders or events</label>
+                </div>
+                <div class="custom-control custom-radio m-1">
+                    <input type="radio" id="rpttype3" name="rpttype" class="custom-control-input" value="2">
+                    <label class="custom-control-label" for="rpttype3">Show all dates</label>
                 </div>
             </div>
             <div class="card-footer">

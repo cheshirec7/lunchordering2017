@@ -118,7 +118,6 @@ class PaymentsController extends Controller
      *
      * @param  Request $request
      * @return \Illuminate\Http\Response
-     * @throws AuthorizationException
      */
     public function create(Request $request)
     {
@@ -168,7 +167,6 @@ class PaymentsController extends Controller
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
-     * @throws AuthorizationException
      */
     public function edit($id)
     {
@@ -191,7 +189,6 @@ class PaymentsController extends Controller
      * Add Payment records for all Accounts that have a current balance
      *
      * @param  Request $request
-     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function updateAll(Request $request)
@@ -249,7 +246,6 @@ class PaymentsController extends Controller
      *
      * @param  int $id
      * @return mixed
-     * @throws  AuthorizationException
      */
     public function destroy($id)
     {

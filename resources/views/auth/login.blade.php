@@ -54,11 +54,11 @@
                     {!! Form::password('password', ['class' => 'form-control', 'required' => 'required']) !!}
                 </div>
 
-                <label class="custom-control custom-checkbox">
-                    {!! Form::checkbox('remember', 1, false, ['class'=> 'custom-control-input', 'id' => 'remember']) !!}
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Remember me&nbsp;&nbsp;<i>(do not use on shared devices)</i></span>
-                </label>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="remember" id="remember">
+                    <label class="custom-control-label" for="remember">Remember me&nbsp;&nbsp;<i>(do not use on shared
+                            devices)</i></label>
+                </div>
             </div>
             <div class="card-footer">
                 {!! link_to_route('password.request', 'Forgot Your Password?', [], ['class' => 'btn btn-light float-right']) !!}
